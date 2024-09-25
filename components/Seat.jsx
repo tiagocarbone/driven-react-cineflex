@@ -3,26 +3,30 @@ import styled from "styled-components"
 
 export default function Seat(props){
 
-    const [seats, setSeats] = useState([])
+    const [clicked, setClicked] = useState(false)
 
-    function escolherAssento(seatId){
-        if (props.isAvailable){
-            setSeats([...seats, seatId])
-            alert("disponivel")
+    function choseSeat(seatId){
+        if (props.isAvailable && !clicked ){
+            props.setSeatsArray([...props.seatsArray, seatId])
+            setClicked(!clicked)
             
-        } else if (!props.isAvailable){
-            return
+        } else if (props.isAvailable && clicked){
+            const newSeatsArray = props.seatsArray.filter((id) => id !== seatId);
+            props.setSeatsArray(newSeatsArray);
+            setClicked(!clicked)
+
         }
     }
 
-    
-        
+    console.log(props.seatsArray)
+   
 
     return (
         <>
 
             <Element isAvailable={props.isAvailable}
-                onClick={() => escolherAssento(props.seatId)}  >
+                clicked={clicked}
+                onClick={() => choseSeat(props.seatId)}  >
                <ElementNumber  > {props.number}</ElementNumber> 
             </Element>
         </>
@@ -34,7 +38,9 @@ const Element = styled.div`
     width: 26px;
     height: 26px;
     background-color:  ${(props) => (props.isAvailable ? "#9DB899" : "#2B2D36")};
-    border: 1px solid #808F9D;
+    background-color:  ${(props) => (props.clicked ? " #FADBC5" : "")};
+    border: ${(props) => (props.clicked? " 2px solid #EE897F" :  " 1px solid #808F9D" )};
+  
     border-radius: 50%;
     display: flex;
     align-items: center;

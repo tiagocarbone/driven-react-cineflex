@@ -17,7 +17,7 @@ export default function SessionDay(props) {
     console.log("selected day", selectedDay)
     return (
         <>
-           
+
             <Container>
 
                 <H2>{props.weekday}, {props.date}  </H2>
@@ -42,17 +42,15 @@ const Container = styled.div`
     
     background-color: #2B2D36;
 
-
-
 `;
 
 const H2 = styled.h2`
-  font-family: "Sarala", sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  text-align: center;
-  padding-top: 10px;
-  color: white;
+    font-family: "Sarala", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 10px;
+    color: white;
     padding-bottom: 10px;
 
 
@@ -61,12 +59,8 @@ const H2 = styled.h2`
 
 
 const ContainerHours = styled.div`
-  
     display: flex;
     justify-content: space-around;
-    
-
-
 `;
 
 

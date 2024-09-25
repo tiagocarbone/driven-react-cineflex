@@ -8,28 +8,13 @@ export default function Seats() {
 
     const { idSessao } = useParams()
     const [seats, setSeats] = useState(null)
-
-
+    const [seatsArray, setSeatsArray] = useState([])
 
     useEffect(() => {
         axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`)
             .then((response) => setSeats(response.data.seats))
             .catch((error) => console.error("Erro ao buscar filmes:", error))
     }, [])
-
-    console.log(seats)
-
-
-    {/*
-
-                            <Element key={seat.id} 
-                                isAvailable={seat.isAvailable} 
-                                onClick={seat.isAvailable && !clicked ? () => escolherAssento(seat.name) : undefined}  >
-                                <ElementNumber>{seat.name}</ElementNumber> 
-                            </Element>
-
-
-*/}
 
     return (
         <>
@@ -40,17 +25,7 @@ export default function Seats() {
                     <H1>Selecione os assentos</H1>
                     <ContainerElements>
                         {seats.map((seat) => (
-                                
-                                 <Seat key={seat.id} seatId={seat.id} isAvailable={seat.isAvailable} number={seat.name} />
-
-                                
-                               /*
-                            <Element key={seat.id}
-                                isAvailable={seat.isAvailable}
-                                 >
-                                <ElementNumber>{seat.name}</ElementNumber>
-                            </Element>
-                            */
+                                 <Seat key={seat.id} seatId={seat.id} isAvailable={seat.isAvailable} number={seat.name} seatsArray={seatsArray} setSeatsArray={setSeatsArray}/>
                         ))}
                     </ContainerElements>
                     <Hr />
