@@ -7,6 +7,7 @@ import Header from '../components/Header'
 import MainPage from '../components/MainPage'
 import MovieSession from '../components/MovieSession'
 import Seats from '../components/Seats'
+import Succes from '../components/Succes'
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
         <Route path='/' element={<MainPage/>}  />
         <Route path='/sessoes/:idFilme' element={<MovieSession/>}  />
         <Route path='/assentos/:idSessao' element={<Seats/>}  />
-
+        <Route path='/sucesso' element={<Succes/>}  />
       </Routes>
 
 

@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Seat from "./Seat";
+
 
 export default function Seats() {
 
@@ -11,6 +12,7 @@ export default function Seats() {
     const [seatsArray, setSeatsArray] = useState([])
     const [textoNome, setTextoNome] = useState("")
     const [textoCpf, setTextoCpf] = useState("")
+    const navigate = useNavigate()
 
 
     console.log(textoNome, textoCpf)
@@ -32,7 +34,8 @@ export default function Seats() {
 
         axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", body)
             .then((res) => {
-                alert("sucesso")
+                alert("Operação concluída com sucesso")
+                navigate("/sucesso")
             })
 
             .catch((err) => {
