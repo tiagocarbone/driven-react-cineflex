@@ -37,7 +37,7 @@ function App() {
         <Route path='/' element={<MainPage/>}  />
         <Route path='/sessoes/:idFilme' element={<MovieSession  setFilmTitle={setFilmTitle} filmTitle={filmTitle} setFilmDate={setFilmDate}  setFilmHour={setFilmHour} />}  />
         <Route path='/assentos/:idSessao' element={<Seats setSeatNumbers={setSeatNumbers} seatNumbers={seatNumbers}  setClientName={setClientName}  setClientCPF={setClientCPF} />}  />
-        <Route path='/sucesso' element={<Succes filmTitle={filmTitle} filmDate={filmDate}  filmHour={filmHour} seatNumbers={seatNumbers} clientName={clientName} clientCPF={clientCPF} />}  />
+        <Route path='/sucesso' element={<Succes filmTitle={filmTitle} filmDate={filmDate}  filmHour={filmHour} setSeatNumbers={setSeatNumbers} seatNumbers={seatNumbers} clientName={clientName} clientCPF={clientCPF} />}  />
       </Routes>
 
 

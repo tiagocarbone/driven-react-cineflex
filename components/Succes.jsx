@@ -1,9 +1,18 @@
+import { useNavigate } from "react-router-dom"
+
 export default function Succes(props){
 
     console.log(props.filmTitle)
     console.log(props.filmDate)
     console.log(props.filmHour)
     console.log(props.seatNumbers)
+    const navigate = useNavigate()
+
+
+    function endOrder(){
+        props.setSeatNumbers([])
+        navigate("/")
+    }
 
     return (
         <>
@@ -14,8 +23,12 @@ export default function Succes(props){
         {props.seatNumbers.map((number) => (
             <p>Assento {number}</p>
         ))}
-        <p>{props.clientCPF}</p>
-        <p>{props.clientName}</p>
+        <p> CPF: {props.clientCPF}</p>
+        <p>Nome: {props.clientName}</p>
+
+        <div onClick={() => endOrder() } >Voltar para tela inicial</div>
+
+
         </>
     )
 }
