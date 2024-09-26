@@ -18,8 +18,6 @@ export default function Seat(props){
         }
     }
 
-    console.log(props.seatsArray)
-   
 
     return (
         <>

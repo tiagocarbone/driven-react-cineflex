@@ -9,6 +9,37 @@ export default function Seats() {
     const { idSessao } = useParams()
     const [seats, setSeats] = useState(null)
     const [seatsArray, setSeatsArray] = useState([])
+    const [textoNome, setTextoNome] = useState("")
+    const [textoCpf, setTextoCpf] = useState("")
+
+
+    console.log(textoNome, textoCpf)
+    
+    function submitForm(e){
+        e.preventDefault()
+        if(seatsArray.length == 0){
+            alert("selecione assentos por favor")
+            return
+        }
+
+        const body = {
+            ids: seatsArray, 
+            name: textoNome, 
+            cpf: textoCpf
+        }
+
+        console.log(body)
+
+        axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", body)
+            .then((res) => {
+                alert("sucesso")
+            })
+
+            .catch((err) => {
+                console.error(err)
+            })
+                
+    }
 
     useEffect(() => {
         axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`)
@@ -25,11 +56,52 @@ export default function Seats() {
                     <H1>Selecione os assentos</H1>
                     <ContainerElements>
                         {seats.map((seat) => (
-                                 <Seat key={seat.id} seatId={seat.id} isAvailable={seat.isAvailable} number={seat.name} seatsArray={seatsArray} setSeatsArray={setSeatsArray}/>
+                            <Seat key={seat.id} seatId={seat.id} isAvailable={seat.isAvailable} number={seat.name} seatsArray={seatsArray} setSeatsArray={setSeatsArray} />
                         ))}
                     </ContainerElements>
                     <Hr />
+
+                    <div>
+                        
+                        <FormContainer>
+                        <form onSubmit={(e) => submitForm(e)} >
+                            <label htmlFor="name">Nome do comprador(a)</label>
+                            <input type="text" 
+                            name="name" 
+                            id="name" 
+                            placeholder="  Digite o seu nome..."
+                            value={textoNome}
+                            required
+                            onChange={((e) => setTextoNome(e.target.value))}
+                            />
+                         
+
+                            <label htmlFor="cpf">CPF do comprador(a)</label>
+                            <input type="number" 
+                            name="cpf" 
+                            id="cpf" 
+                            placeholder=" Digite o seu CPF..." 
+                            value={textoCpf}
+                            required
+                            onChange={((e) => setTextoCpf(e.target.value) )}
+                            />
+
+                            <input type="submit" 
+                            name="submit" 
+                            id="submit" 
+                            value="Reservar assentos(s) " 
+                            
+                            />
+                           
+
+                            </form>
+                            </FormContainer>
+                       
+                    </div>
+
                 </Container>
+
+
 
             }
         </>
@@ -44,6 +116,50 @@ const Container = styled.div`
   width: inherit;
 
     height: 713px;
+
+`;
+
+const FormContainer = styled.div`
+
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+
+    }
+
+  label{
+    padding-left: 40px;
+    color: white;
+    font-family: "Sarala";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26.09px;
+    text-align: left;
+
+  }
+  input{
+    width: 80%;
+    margin: auto;
+    border: 1px solid #D4D4D4;
+    height: 35px;
+    border-radius: 10px;
+  }
+
+  #submit{
+    font-family: Sarala;
+font-size: 18px;
+font-weight: 700;
+line-height: 29.35px;
+letter-spacing: 0.04em;
+text-align: center;
+background-color: #EE897F;
+color: #2B2D36;
+border: none;
+width: 81%;
+margin-top: 25px;
+height: 42px;
+  }
 
 `;
 
