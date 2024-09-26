@@ -8,8 +8,23 @@ import MainPage from '../components/MainPage'
 import MovieSession from '../components/MovieSession'
 import Seats from '../components/Seats'
 import Succes from '../components/Succes'
+import { useState } from 'react'
 
 function App() {
+
+  const [filmTitle, setFilmTitle] = useState("")
+  const [filmDate, setFilmDate] = useState("")
+  const [filmHour, setFilmHour] = useState("")
+  const [seatNumbers, setSeatNumbers] = useState([])
+  const [clientName, setClientName] = useState("")
+  const [clientCPF, setClientCPF] = useState("")
+
+  /*
+
+    Nome e cpf do comprador
+
+*/
+
 
 
   return (
@@ -20,9 +35,9 @@ function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<MainPage/>}  />
-        <Route path='/sessoes/:idFilme' element={<MovieSession/>}  />
-        <Route path='/assentos/:idSessao' element={<Seats/>}  />
-        <Route path='/sucesso' element={<Succes/>}  />
+        <Route path='/sessoes/:idFilme' element={<MovieSession  setFilmTitle={setFilmTitle} filmTitle={filmTitle} setFilmDate={setFilmDate}  setFilmHour={setFilmHour} />}  />
+        <Route path='/assentos/:idSessao' element={<Seats setSeatNumbers={setSeatNumbers} seatNumbers={seatNumbers}  setClientName={setClientName}  setClientCPF={setClientCPF} />}  />
+        <Route path='/sucesso' element={<Succes filmTitle={filmTitle} filmDate={filmDate}  filmHour={filmHour} seatNumbers={seatNumbers} clientName={clientName} clientCPF={clientCPF} />}  />
       </Routes>
 
 

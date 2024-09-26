@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Seat from "./Seat";
 
 
-export default function Seats() {
+export default function Seats(props) {
 
     const { idSessao } = useParams()
     const [seats, setSeats] = useState(null)
@@ -29,6 +29,9 @@ export default function Seats() {
             name: textoNome, 
             cpf: textoCpf
         }
+
+        props.setClientName(textoNome)
+        props.setClientCPF(textoCpf)
 
         console.log(body)
 
@@ -59,7 +62,7 @@ export default function Seats() {
                     <H1>Selecione os assentos</H1>
                     <ContainerElements>
                         {seats.map((seat) => (
-                            <Seat key={seat.id} seatId={seat.id} isAvailable={seat.isAvailable} number={seat.name} seatsArray={seatsArray} setSeatsArray={setSeatsArray} />
+                            <Seat setSeatNumbers={props.setSeatNumbers} seatNumbers={props.seatNumbers} key={seat.id} seatId={seat.id} isAvailable={seat.isAvailable} number={seat.name} seatsArray={seatsArray} setSeatsArray={setSeatsArray} />
                         ))}
                     </ContainerElements>
                     <Hr />

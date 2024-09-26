@@ -2,19 +2,33 @@ import styled from "styled-components"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 export default function SessionDay(props) {
     const [sessionDays, setSessionDays] = useState([])
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${props.idFilme}/showtimes`)
-            .then((response) => setSessionDays(response.data.days))
+            .then((response) => {
+                setSessionDays(response.data.days)
+                
+            })
             .catch((error) => console.error("Erro ao buscar filmes:", error))
     }, [])
 
 
     const selectedDay = sessionDays.find((day) => day.id === props.dayId)
-    console.log("selected day", selectedDay)
+
+    function getMovieInfo(showtime){
+
+        props.setFilmDate(props.date)
+        props.setFilmHour(showtime.name)
+
+  
+    }
+
+
     return (
         <>
 
@@ -25,7 +39,7 @@ export default function SessionDay(props) {
 
                 <ContainerHours  >
                     {selectedDay && selectedDay.showtimes.map((showtime) => (
-                        <LinkHour to={`/assentos/${showtime.id}`} key={showtime.id} >{showtime.name}  </LinkHour>
+                        <LinkHour onClick={()=> getMovieInfo(showtime) }   to={`/assentos/${showtime.id}`}  key={showtime.id} >{showtime.name}  </LinkHour>
                     ))}
                 </ContainerHours>
             </Container>

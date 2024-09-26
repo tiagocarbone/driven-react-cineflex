@@ -5,26 +5,28 @@ export default function Seat(props){
 
     const [clicked, setClicked] = useState(false)
 
-    function choseSeat(seatId){
+    function choseSeat(seatId, seatNumber){
         if (props.isAvailable && !clicked ){
             props.setSeatsArray([...props.seatsArray, seatId])
             setClicked(!clicked)
+            props.setSeatNumbers([...props.seatNumbers, seatNumber])
             
         } else if (props.isAvailable && clicked){
             const newSeatsArray = props.seatsArray.filter((id) => id !== seatId);
             props.setSeatsArray(newSeatsArray);
             setClicked(!clicked)
-
+            
         }
     }
 
+    
 
     return (
         <>
 
             <Element isAvailable={props.isAvailable}
                 clicked={clicked}
-                onClick={() => choseSeat(props.seatId)}  >
+                onClick={() => choseSeat(props.seatId, props.number)}  >
                <ElementNumber  > {props.number}</ElementNumber> 
             </Element>
         </>
