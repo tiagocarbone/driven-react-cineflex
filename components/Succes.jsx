@@ -24,8 +24,7 @@ export default function Succes(props) {
                 <H2>Filme e Sessão</H2>
                 <hr />
                     <p>{props.filmTitle}</p>
-                    <p>{props.filmDate}</p>
-                    <p>{props.filmHour}</p>
+                    <p>{props.filmDate} às {props.filmHour}</p>
 
                     <H2>Ingressos</H2>
                     <hr />
