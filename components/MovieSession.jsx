@@ -7,7 +7,7 @@ import styled from "styled-components"
 
 export default  function MovieSession(props){
     const {idFilme} = useParams()
-    const [days, setDays] = useState([])
+    const [days, setDays] = useState(null)
 
     useEffect(() => {
         axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`)
@@ -23,7 +23,10 @@ export default  function MovieSession(props){
     return (
         <Container>
             <H1>Selecione o horário</H1>
-        {days.map((day) => (
+
+        {!days && <H1Loading>Carregando...</H1Loading>}
+
+        {days && days.map((day) => (
             <SessionDay key={day.id} 
             weekday={day.weekday} 
             idFilme={idFilme} 
@@ -38,6 +41,11 @@ export default  function MovieSession(props){
         </Container>
     )
 }
+
+const H1Loading = styled.h1 `
+    color: white;
+`
+
 
 const Container = styled.div`
     background-color: #000000f0;

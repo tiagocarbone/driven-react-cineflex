@@ -13,11 +13,17 @@ export default function ListaFilmes() {
 
     }, [])
 
-    const [movies, setMovies] = useState([])
+    const [movies, setMovies] = useState(null)
 
     return (
+
+       
+
         <Container>
-            {movies.map((movie) => (
+
+            {!movies  && <H1>Carregando...</H1>}
+
+            {movies && movies.map((movie) => (
                 <Link key={movie.id} to={`sessoes/${movie.id}`} >
                     <Movie url={movie.posterURL} title={movie.title} />
                 </Link>
@@ -37,3 +43,7 @@ const Container = styled.div`
     gap: 25px;
     overflow: auto;
  `
+
+const H1 = styled.h1 `
+    color: white;
+`

@@ -118,7 +118,7 @@ export default function Seats(props) {
 
 
 const Container = styled.div`
-  background-color: #2B2D36;;
+  background-color: #000000f0;
   width: inherit;
 
     height: 713px;
